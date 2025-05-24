@@ -206,19 +206,6 @@
         const theEnd = document.getElementById('theEnd');
         
         startButton.addEventListener('click', async () => {
-            // Generate the background tile
-            const backgroundResult = await websim.imageGen({
-                prompt: "Seamless tileable texture, sunny painted landscape with pixelated art style, warm golden light, painted brushstrokes, low resolution pixel art aesthetic, repeating pattern, no borders or edges visible",
-                width: 400,
-                height: 400,
-            });
-            
-            // Update the background image
-            const backgroundElements = document.querySelectorAll('.background-scroll');
-            backgroundElements.forEach(element => {
-                element.style.backgroundImage = `url('${backgroundResult.url}')`;
-            });
-            
             // Start the experience
             startScreen.style.display = 'none';
             outroContainer.style.display = 'block';
