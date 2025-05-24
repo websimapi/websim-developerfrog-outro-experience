@@ -58,27 +58,28 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 200%;
+            width: 200%;
+            height: 100%;
             background-image: url('background-tile.png');
             background-repeat: repeat;
             background-size: 400px 400px;
-            animation: scrollUp 30s linear infinite;
+            animation: scrollLeft 30s linear infinite;
             opacity: 0.8;
         }
         
         .credits-container {
             position: absolute;
-            top: 100vh;
-            left: 0;
-            width: 100%;
-            height: 200vh;
+            top: 50%;
+            left: 100vw;
+            width: 200vw;
+            height: auto;
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             justify-content: space-around;
             align-items: center;
-            animation: creditsScroll 25s linear infinite;
+            animation: creditsScrollLeft 25s linear infinite;
             z-index: 10;
+            transform: translateY(-50%);
         }
         
         .credit-line {
@@ -103,14 +104,14 @@
             animation: fadeIn 3s ease-in;
         }
         
-        @keyframes scrollUp {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-50%); }
+        @keyframes scrollLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
         
-        @keyframes creditsScroll {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-100vh); }
+        @keyframes creditsScrollLeft {
+            0% { transform: translate(0, -50%); }
+            100% { transform: translate(-100vw, -50%); }
         }
         
         @keyframes fadeIn {
@@ -192,12 +193,11 @@
             creditsElement.style.animation = 'none';
             
             setTimeout(() => {
-                backgroundElement.style.animation = 'scrollUp 30s linear infinite';
-                creditsElement.style.animation = 'creditsScroll 25s linear infinite';
+                backgroundElement.style.animation = 'scrollLeft 30s linear infinite';
+                creditsElement.style.animation = 'creditsScrollLeft 25s linear infinite';
             }, 10);
         }, 25000);
     </script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4c6229722a6346bc8eb5cb0e5eae5d41","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
-
