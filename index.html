@@ -71,13 +71,13 @@
             position: absolute;
             top: 50%;
             left: 100vw;
-            width: 200vw;
+            width: 600vw;
             height: auto;
             display: flex;
             flex-direction: row;
             justify-content: space-around;
             align-items: center;
-            animation: creditsScrollLeft 25s linear infinite;
+            animation: creditsScrollLeft 180s linear infinite;
             z-index: 10;
             transform: translateY(-50%);
         }
@@ -111,7 +111,7 @@
         
         @keyframes creditsScrollLeft {
             0% { transform: translate(0, -50%); }
-            100% { transform: translate(-100vw, -50%); }
+            100% { transform: translate(-500vw, -50%); }
         }
         
         @keyframes fadeIn {
@@ -129,6 +129,36 @@
         <div class="background-scroll"></div>
         
         <div class="credits-container">
+            <div class="credit-line">Zixblythara Mornvex</div>
+            <div class="credit-line">Quenthrax Voidlume</div>
+            <div class="credit-line">Yelmaroth Duskweave</div>
+            <div class="credit-line">Brixenthol Starwhisper</div>
+            <div class="credit-line">Nyvethara Moonspell</div>
+            <div class="credit-line">Threnodix Shadowmend</div>
+            <div class="credit-line">Velthoran Mistcaller</div>
+            <div class="credit-line">Zephyros Nightbane</div>
+            <div class="credit-line">Quarvendel Stormbringer</div>
+            <div class="credit-line">Ixyleth Dreamkeeper</div>
+            <div class="credit-line">Morphendal Voidseeker</div>
+            <div class="credit-line">Zentharax Blazeheart</div>
+            <div class="credit-line">Vylnethra Frostguard</div>
+            <div class="credit-line">Qorthenis Skyrender</div>
+            <div class="credit-line">Brethenval Soulforge</div>
+            <div class="credit-line">Zixblythara Mornvex</div>
+            <div class="credit-line">Quenthrax Voidlume</div>
+            <div class="credit-line">Yelmaroth Duskweave</div>
+            <div class="credit-line">Brixenthol Starwhisper</div>
+            <div class="credit-line">Nyvethara Moonspell</div>
+            <div class="credit-line">Threnodix Shadowmend</div>
+            <div class="credit-line">Velthoran Mistcaller</div>
+            <div class="credit-line">Zephyros Nightbane</div>
+            <div class="credit-line">Quarvendel Stormbringer</div>
+            <div class="credit-line">Ixyleth Dreamkeeper</div>
+            <div class="credit-line">Morphendal Voidseeker</div>
+            <div class="credit-line">Zentharax Blazeheart</div>
+            <div class="credit-line">Vylnethra Frostguard</div>
+            <div class="credit-line">Qorthenis Skyrender</div>
+            <div class="credit-line">Brethenval Soulforge</div>
             <div class="credit-line">Zixblythara Mornvex</div>
             <div class="credit-line">Quenthrax Voidlume</div>
             <div class="credit-line">Yelmaroth Duskweave</div>
@@ -183,20 +213,6 @@
         audio.addEventListener('ended', () => {
             theEnd.style.display = 'block';
         });
-        
-        // Restart animations when they complete to ensure infinite loop
-        setInterval(() => {
-            const backgroundElement = document.querySelector('.background-scroll');
-            const creditsElement = document.querySelector('.credits-container');
-            
-            backgroundElement.style.animation = 'none';
-            creditsElement.style.animation = 'none';
-            
-            setTimeout(() => {
-                backgroundElement.style.animation = 'scrollLeft 30s linear infinite';
-                creditsElement.style.animation = 'creditsScrollLeft 25s linear infinite';
-            }, 10);
-        }, 25000);
     </script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4c6229722a6346bc8eb5cb0e5eae5d41","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
