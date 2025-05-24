@@ -61,14 +61,26 @@
             width: 100vw;
             height: 100%;
             background-repeat: repeat;
-            background-size: 200% 100%;
+            background-size: 300% 100%;
             animation: scrollLeft 180s linear infinite;
             opacity: 0.8;
         }
         
+        .background-scroll::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50px;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
         @keyframes scrollLeft {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-9900vw); }
+            100% { transform: translateX(-14900vw); }
         }
         
         .credits-container {
@@ -190,7 +202,7 @@
         // Generate unique background image on page load
         async function generateBackground() {
             const result = await websim.imageGen({
-                prompt: "Seamless horizontally tileable texture, sunny painted landscape with pixelated art style, warm golden light, painted brushstrokes, low resolution pixel art aesthetic, repeating pattern, LEFT AND RIGHT EDGES MUST BE IDENTICAL for perfect horizontal tiling, no visible seams when placed side by side, seamless wrap-around pattern",
+                prompt: "Seamless tileable texture, sunny painted landscape with pixelated art style, warm golden light, painted brushstrokes, low resolution pixel art aesthetic, repeating pattern, no borders or edges visible, tile-able on all sides",
                 aspect_ratio: "1:1"
             });
             
