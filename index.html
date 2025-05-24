@@ -60,7 +60,6 @@
             left: 0;
             width: 100vw;
             height: 100%;
-            background-image: url('background-tile.png');
             background-repeat: repeat;
             background-size: auto 100%;
             animation: scrollLeft 120s linear infinite;
@@ -187,6 +186,23 @@
         const outroContainer = document.getElementById('outroContainer');
         const audio = document.getElementById('outroAudio');
         const theEnd = document.getElementById('theEnd');
+        
+        // Generate unique background image on page load
+        async function generateBackground() {
+            const result = await websim.imageGen({
+                prompt: "Seamless tileable texture, sunny painted landscape with pixelated art style, warm golden light, painted brushstrokes, low resolution pixel art aesthetic, repeating pattern, no borders or edges visible, tile-able on all sides",
+                aspect_ratio: "1:1"
+            });
+            
+            // Update all background divs with the generated image
+            const backgroundDivs = document.querySelectorAll('.background-scroll');
+            backgroundDivs.forEach(div => {
+                div.style.backgroundImage = `url(${result.url})`;
+            });
+        }
+        
+        // Generate background when page loads
+        generateBackground();
         
         // Create 100 background divs for seamless scrolling
         for (let i = 0; i < 100; i++) {
