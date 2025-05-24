@@ -61,8 +61,8 @@
             width: 100vw;
             height: 100%;
             background-repeat: repeat;
-            background-size: auto 100%;
-            animation: scrollLeft 120s linear infinite;
+            background-size: 200% 100%;
+            animation: scrollLeft 180s linear infinite;
             opacity: 0.8;
         }
         
@@ -81,9 +81,14 @@
             flex-direction: row;
             justify-content: space-around;
             align-items: center;
-            animation: creditsScrollLeft 120s linear infinite;
+            animation: creditsScrollLeft 180s linear infinite;
             z-index: 10;
             transform: translateY(-50%);
+        }
+        
+        @keyframes creditsScrollLeft {
+            0% { transform: translate(0, -50%); }
+            100% { transform: translate(-500vw, -50%); }
         }
         
         .credit-line {
@@ -106,11 +111,6 @@
             text-shadow: 4px 4px 8px rgba(0,0,0,0.8);
             z-index: 20;
             animation: fadeIn 3s ease-in;
-        }
-        
-        @keyframes creditsScrollLeft {
-            0% { transform: translate(0, -50%); }
-            100% { transform: translate(-500vw, -50%); }
         }
         
         @keyframes fadeIn {
