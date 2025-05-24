@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outro Experience</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Creepster', cursive;
+            background: #000;
+            color: white;
+            overflow: hidden;
+            height: 100vh;
+        }
+        
+        .start-screen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(45deg, #1a1a1a, #333);
+        }
+        
+        .start-button {
+            padding: 20px 40px;
+            font-size: 24px;
+            font-family: 'Creepster', cursive;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border: none;
+            border-radius: 15px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        
+        .start-button:hover {
+            transform: scale(1.1);
+        }
+        
+        .outro-container {
+            display: none;
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .background-scroll {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200%;
+            background-image: url('background-tile.png');
+            background-repeat: repeat;
+            background-size: 400px 400px;
+            animation: scrollUp 30s linear infinite;
+            opacity: 0.8;
+        }
+        
+        .credits-container {
+            position: absolute;
+            top: 100vh;
+            left: 0;
+            width: 100%;
+            height: 200vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            animation: creditsScroll 25s linear infinite;
+            z-index: 10;
+        }
+        
+        .credit-line {
+            font-size: 32px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            text-align: center;
+            padding: 20px;
+            opacity: 0.9;
+        }
+        
+        .the-end {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 72px;
+            color: #fff;
+            text-shadow: 4px 4px 8px rgba(0,0,0,0.8);
+            z-index: 20;
+            animation: fadeIn 3s ease-in;
+        }
+        
+        @keyframes scrollUp {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+        
+        @keyframes creditsScroll {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100vh); }
+        }
+        
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="start-screen" id="startScreen">
+        <button class="start-button" id="startButton">Start Experience</button>
+    </div>
+    
+    <div class="outro-container" id="outroContainer">
+        <div class="background-scroll"></div>
+        
+        <div class="credits-container">
+            <div class="credit-line">Zixblythara Mornvex</div>
+            <div class="credit-line">Quenthrax Voidlume</div>
+            <div class="credit-line">Yelmaroth Duskweave</div>
+            <div class="credit-line">Brixenthol Starwhisper</div>
+            <div class="credit-line">Nyvethara Moonspell</div>
+            <div class="credit-line">Threnodix Shadowmend</div>
+            <div class="credit-line">Velthoran Mistcaller</div>
+            <div class="credit-line">Zephyros Nightbane</div>
+            <div class="credit-line">Quarvendel Stormbringer</div>
+            <div class="credit-line">Ixyleth Dreamkeeper</div>
+            <div class="credit-line">Morphendal Voidseeker</div>
+            <div class="credit-line">Zentharax Blazeheart</div>
+            <div class="credit-line">Vylnethra Frostguard</div>
+            <div class="credit-line">Qorthenis Skyrender</div>
+            <div class="credit-line">Brethenval Soulforge</div>
+        </div>
+        
+        <div class="the-end" id="theEnd">The End</div>
+    </div>
+    
+    <audio id="outroAudio" preload="auto">
+        <source src="/Fade to Silence - Last Light - Sonauto.ogg" type="audio/ogg">
+    </audio>
+    
+    <script>
+        const startButton = document.getElementById('startButton');
+        const startScreen = document.getElementById('startScreen');
+        const outroContainer = document.getElementById('outroContainer');
+        const audio = document.getElementById('outroAudio');
+        const theEnd = document.getElementById('theEnd');
+        
+        startButton.addEventListener('click', async () => {
+            // Generate the background tile
+            const backgroundResult = await websim.imageGen({
+                prompt: "Seamless tileable texture, sunny painted landscape with pixelated art style, warm golden light, painted brushstrokes, low resolution pixel art aesthetic, repeating pattern, no borders or edges visible",
+                width: 400,
+                height: 400,
+            });
+            
+            // Update the background image
+            const backgroundElement = document.querySelector('.background-scroll');
+            backgroundElement.style.backgroundImage = `url('${backgroundResult.url}')`;
+            
+            // Start the experience
+            startScreen.style.display = 'none';
+            outroContainer.style.display = 'block';
+            
+            // Play audio
+            audio.play();
+        });
+        
+        audio.addEventListener('ended', () => {
+            theEnd.style.display = 'block';
+        });
+        
+        // Restart animations when they complete to ensure infinite loop
+        setInterval(() => {
+            const backgroundElement = document.querySelector('.background-scroll');
+            const creditsElement = document.querySelector('.credits-container');
+            
+            backgroundElement.style.animation = 'none';
+            creditsElement.style.animation = 'none';
+            
+            setTimeout(() => {
+                backgroundElement.style.animation = 'scrollUp 30s linear infinite';
+                creditsElement.style.animation = 'creditsScroll 25s linear infinite';
+            }, 10);
+        }, 25000);
+    </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4c6229722a6346bc8eb5cb0e5eae5d41","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
+
