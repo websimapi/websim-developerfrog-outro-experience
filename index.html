@@ -57,13 +57,24 @@
         .background-scroll {
             position: absolute;
             top: 0;
-            left: 0;
+            left: 0; 
             width: 100vw;
             height: 100%;
             background-repeat: repeat;
-            background-size: 200% 100%;
+            background-size: 400% 100%; 
             animation: scrollLeft 180s linear infinite;
             opacity: 0.8;
+        }
+
+        .background-scroll::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0; 
+            width: 70px; 
+            height: 100%;
+            background: linear-gradient(to left, rgba(0,0,0,1) 5%, rgba(0,0,0,0) 100%);
+            pointer-events: none; 
         }
         
         @keyframes scrollLeft {
@@ -125,6 +136,7 @@
     </div>
     
     <div class="outro-container" id="outroContainer">
+        <!-- Background divs are prepended here by JS -->
         <div class="credits-container">
             <div class="credit-line">Zixblythara Mornvex</div>
             <div class="credit-line">Quenthrax Voidlume</div>
@@ -187,38 +199,36 @@
         const audio = document.getElementById('outroAudio');
         const theEnd = document.getElementById('theEnd');
         
-        // Generate unique background image on page load
         async function generateBackground() {
             const result = await websim.imageGen({
                 prompt: "Seamless tileable texture, sunny painted landscape with pixelated art style, warm golden light, painted brushstrokes, low resolution pixel art aesthetic, repeating pattern, no borders or edges visible, tile-able on all sides",
                 aspect_ratio: "1:1"
             });
             
-            // Update all background divs with the generated image
             const backgroundDivs = document.querySelectorAll('.background-scroll');
             backgroundDivs.forEach(div => {
                 div.style.backgroundImage = `url(${result.url})`;
             });
         }
         
-        // Generate background when page loads
-        generateBackground();
-        
-        // Create 100 background divs for seamless scrolling
         for (let i = 0; i < 100; i++) {
             const bgDiv = document.createElement('div');
             bgDiv.className = 'background-scroll';
             bgDiv.style.left = (i * 100) + 'vw';
             outroContainer.insertBefore(bgDiv, outroContainer.firstChild);
         }
+
+        generateBackground(); 
         
         startButton.addEventListener('click', async () => {
-            // Start the experience
             startScreen.style.display = 'none';
             outroContainer.style.display = 'block';
             
-            // Play audio
-            audio.play();
+            try {
+                await audio.play();
+            } catch (err) {
+                console.error("Audio play failed:", err);
+            }
         });
         
         audio.addEventListener('ended', () => {
